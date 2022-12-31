@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("v1/api/short-url")
 @Validated
-class UrlShortenerController(private val urlShortenerService: UrlShortenerService) {
+open class UrlShortenerController(private val urlShortenerService: UrlShortenerService) {
 
     @PostMapping(value = [""], produces = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseStatus(HttpStatus.OK)
