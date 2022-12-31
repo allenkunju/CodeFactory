@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
+import javax.validation.constraints.NotBlank
 
 @RestController
 @RequestMapping("v1/api/short-url")
@@ -13,13 +14,13 @@ open class UrlShortenerController(private val urlShortenerService: UrlShortenerS
 
     @PostMapping(value = [""], produces = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseStatus(HttpStatus.OK)
-    fun shortenUrl(@RequestBody longUrl: String): String {
+    open fun shortenUrl(@RequestBody @NotBlank longUrl: String): String {
         return urlShortenerService.shortenUrl(longUrl)
     }
 
     @GetMapping(value = ["/{short-url}"], produces = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseStatus(HttpStatus.OK)
-    fun resolveUrl(@PathVariable("short-url") shortUrl: String): String {
+    open fun resolveUrl(@PathVariable("short-url") shortUrl: String): String {
         return urlShortenerService.resolveUrl(shortUrl)
     }
 }
